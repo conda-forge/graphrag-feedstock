@@ -1,3 +1,4 @@
+{% set python_min = '3.10' %}
 {% set name = "graphrag" %}
 {% set version = "0.5.0" %}
 
@@ -12,11 +13,11 @@ source:
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.10,<3.13
+    - python {{ python_min }}
     - poetry-core >=1.0.0
     - poetry-dynamic-versioning >=1.0.0,<2.0.0
     - pip
@@ -29,7 +30,7 @@ requirements:
     - umap-learn >=0.5.6,<0.6.0
     - future >=1.0.0,<2.0.0
     - json-repair >=0.30.0,<0.31.0
-    - python >=3.10,<3.13
+    - python >={{ python_min }},<3.13
     - environs >=11.0.0,<12.0.0
     - datashaper >=0.0.49,<0.0.50
     - azure-search-documents >=11.4.0,<12.0.0
@@ -67,6 +68,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   summary: A modular graph-based Retrieval-Augmented Generation (RAG) system
